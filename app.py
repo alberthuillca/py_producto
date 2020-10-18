@@ -64,16 +64,22 @@ def listar_categoria():
 @app.route('/categoria/<id>', methods=['GET'])
 def listar_categoria_id(id):
     cur = mysql.connection.cursor()
-    cur.execute('SELECT * FROM categoria WHERE idcategoria = %s', (id,))
+    cur.execute('SELECT * FROM producto WHERE idcategoria = %s', (id,))
     data = cur.fetchall()
     alData = []
     print(data)
     for i in range(len(data)):
-            idc = data[i][0]
+            idp = data[i][0]
             name = data[i][1]
+            precio = data[i][2]
+            cantidad = data[i][3]
+            idc = data[i][4]
             datadesc = {
-                "idcategoria": idc,
-                "nom_categoria": name,
+                "idproducto": idp,
+                "nom_producto": name,
+                "precio": precio,
+                "cantidad": cantidad,
+                "idcategoria": idc
             }
             alData.append(datadesc)
 
