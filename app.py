@@ -48,36 +48,36 @@ def listar_categoria():
     cur = mysql.connection.cursor()
     cur.execute('SELECT * FROM categoria')
     data = cur.fetchall()
-    allData = []
+    Data = []
     print(data)
     for i in range(len(data)):
             idc = data[i][0]
             name = data[i][1]
-            dataDict = {
+            datades = {
                 "idcategoria": idc,
                 "nom_categoria": name,
             }
-            allData.append(dataDict)
+            Data.append(datades)
 
-    return jsonify(allData)
+    return jsonify(Data)
 
 @app.route('/categoria/<id>', methods=['GET'])
-def listar_categoria(id):
+def listar_categoria_id(id):
     cur = mysql.connection.cursor()
     cur.execute('SELECT * FROM categoria WHERE idcategoria = %s', (id,))
     data = cur.fetchall()
-    allData = []
+    alData = []
     print(data)
     for i in range(len(data)):
             idc = data[i][0]
             name = data[i][1]
-            dataDict = {
+            datadesc = {
                 "idcategoria": idc,
                 "nom_categoria": name,
             }
-            allData.append(dataDict)
+            alData.append(datadesc)
 
-    return jsonify(allData)
+    return jsonify(alData)
 
 
 @app.route('/<id>', methods=['GET'])
