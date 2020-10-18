@@ -61,6 +61,25 @@ def listar_categoria():
 
     return jsonify(allData)
 
+@app.route('/categoria/<id>', methods=['GET'])
+def listar_categoria(id):
+    cur = mysql.connection.cursor()
+    cur.execute('SELECT * FROM categoria WHERE idcategoria = %s', (id,))
+    data = cur.fetchall()
+    allData = []
+    print(data)
+    for i in range(len(data)):
+            idc = data[i][0]
+            name = data[i][1]
+            dataDict = {
+                "idcategoria": idc,
+                "nom_categoria": name,
+            }
+            allData.append(dataDict)
+
+    return jsonify(allData)
+
+
 @app.route('/<id>', methods=['GET'])
 def listar_producto_id(id):
     cur = mysql.connection.cursor()
