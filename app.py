@@ -61,6 +61,18 @@ def listar_categoria():
 
     return jsonify(Data)
 
+
+@app.route('/venta', methods=['GET'])
+def listar_id_venta():
+    cur = mysql.connection.cursor()
+    cur.execute('SELECT MAX(idventa) FROM venta')
+    data = cur.fetchall() 
+    idnew = data[0]
+
+    return jsonify(idnew)
+
+
+
 @app.route('/categoria/<id>', methods=['GET'])
 def listar_categoria_id(id):
     cur = mysql.connection.cursor()
@@ -109,6 +121,7 @@ def listar_producto_id(id):
             allData.append(dataDict)
 
     return jsonify(allData)
+
 
 @app.route('/add', methods=['POST'])
 def registrar_producto():
